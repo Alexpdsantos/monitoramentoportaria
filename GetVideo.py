@@ -1,5 +1,6 @@
 import sys
 from configs import *
+from GetConnection import *
 from datetime import *
 import cv2
 import numpy as np
@@ -8,6 +9,7 @@ from ImageCreatedHandler import *
 
 carros = caminhoes = 0
 print('Passo 1')
+
 
 def startCamera():
     def getCenter(x, y, largura, altura):
@@ -70,12 +72,12 @@ def startCamera():
             frame = cv2.resize(frame, (980, 600))
             frame2 = cv2.resize(frame2, (980, 600))
             cv2.imshow("Camera", frame)
-            #cv2.imshow("Monitoramento", frame2)
+            # cv2.imshow("Monitoramento", frame2)
 
             setInfo(detec)
 
             ch = cv2.waitKey(1)
-            if ch == ord('q') or ch == ord('Q'): 
+            if ch == ord('q') or ch == ord('Q'):
                 data_e_hora_atuais2 = datetime.now()
                 dataHora2 = data_e_hora_atuais2.strftime(
                     "%Y-%m-%d %H-%M-%S.%f")

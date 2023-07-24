@@ -11,6 +11,8 @@ ________________________________________________________________________________
 conexão rstp para acesso a câmeras IP
 source = 'rtsp://usuario:password@endereço_ip:554/cam/realmonitor?channel=1&subtype=0'
 ______________________________________________________________________________________
+SECRET_KEY = 'sk_DEMODEMODEMODEMODEMODEMO'
+______________________________________________________________________________________
 #Configurações para utilização no Windows
 python --version
 python3 --version

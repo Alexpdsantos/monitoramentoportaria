@@ -2,6 +2,7 @@ import time
 from watchdog.observers import Observer
 from watchdog. events import FileSystemEventHandler
 from GetPlate import getP
+from GetConnection import *
 
 import requests
 import json
@@ -58,7 +59,7 @@ def getVehicle():
         # Salvar arquivo JSON
         with open('data.json', 'w', encoding='utf-8') as f:
             json.dump(r.json(), f, ensure_ascii=False, indent=2)
-            
+
         getP()
     except FileNotFoundError as ex:
         print(f'Arquivo não encontrado!{ex}')
@@ -67,7 +68,4 @@ def getVehicle():
         print(f"Exceção não tratada!{exception}")
 
 
-SECRET_KEY = 'sk_DEMODEMODEMODEMODEMODEMO'
-# SECRET_KEY = 'sk_533ba06333a38991b953f55a'
-# SECRET_KEY = 'sk_8286db81f9caf85181ce2272'
 # IMAGE_PATH = imagem
