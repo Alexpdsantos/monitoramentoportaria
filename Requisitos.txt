@@ -1,0 +1,54 @@
+##Requisitos para executar o sistema MonitoramentoPortaria##
+
+configurações para conexão com o banco de dados
+conexao = mysql.connector.connect(
+    host='',
+    user='',
+    password='',
+    database=''
+)
+______________________________________________________________________________________
+conexão rstp para acesso a câmeras IP
+source = 'rtsp://usuario:password@endereço_ip:554/cam/realmonitor?channel=1&subtype=0'
+______________________________________________________________________________________
+#Configurações para utilização no Windows
+python --version
+python3 --version
+pip --version
+pip install --upgrade pip setuptools wheel
+pip install opencv-python
+pip install watchdog
+
+pip install watchdog-gevent
+
+pip install requests
+pip install mysql.connector
+pip install opencv-contrib-python
+______________________________________________________________________________________
+#Configurações para utilização na placa raspberry pi
+sudo systemctl enable ssh.service 
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get autoremove
+sudo apt-get install realvnc-vnc-server realvnc-vnc-viewer
+sudo systemctl enable vncserver-x11-serviced.service
+sudo vncpasswd -service
+
+#Habilitar dhcpcd
+sudo systemctl enable dhcpcd
+
+sudo nano /root/.vnc/config.d/vncserver-x11 
+SecurityTypes=VncAuth 
+UserPasswdVerifier=VncAuth
+
+#Em caso de erro (VNC Server has no security types configured), há necessidade
+de alterar:
+sudo nano /root/.vnc/config.d/vncserver-x11
+Authentication=VncAuth
+Encryption=AlwaysOn
+Acessar as configurações do VNCServer e permitir acesso
+
+sudo netstat -anlp | grep :59
+sudo reboot 
+
+
