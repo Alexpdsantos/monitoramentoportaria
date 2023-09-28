@@ -1,0 +1,31 @@
+import sys
+from PyQt6 import QtCore, QtGui, QtWidgets, uic
+from PyQt6.QtWidgets import *
+from PyQt6.QtGui import *
+
+from datetime import *
+import cv2
+import numpy as np
+import threading
+
+import time
+from watchdog.observers import Observer
+from watchdog. events import FileSystemEventHandler
+
+import requests
+import json
+import base64
+
+import tkinter as tk
+from tkinter import messagebox
+import json
+from plyer import notification
+import pyperclip
+import os
+import ImageCreatedHandler as ich
+import mysql.connector
+
+from bs4 import BeautifulSoup
+import json
+opencv-contrib-python
+

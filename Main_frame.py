@@ -8,23 +8,25 @@
 import sys
 from PyQt6 import QtCore, QtGui, QtWidgets, uic
 from PyQt6.QtWidgets import *
+from PyQt6.QtCore import Qt
 from PyQt6.QtGui import *
-import threading
 from ImageCreatedHandler import *
-from GetVideo import startCamera
-
-thread = threading.Thread(target=ImageHandler)
-thread.daemon = True
-thread.start()
+from frame_relat2 import *
+from GetVideo import *
 
 
-def actionVehicleRegistrations():
-    print("Abrindo Registro de veículos...")
+def actionVehicleRegistration():
+    if not Window2.isVisible():
+        print("Abrindo Registro de veículos...")
+        Window2.show()
+    else:
+        print("A janela de Registro de veículos já está aberta...")
+        Window2.raise_()
 
 
 def actionStartCamera():
-    print("Iniciando o video...")
-    startCamera()
+    startCamera(source, pos_linha, offset, largura_min, altura_min)
+    print("iniciando Monitoramento!")
 
 
 def actionExit():
@@ -32,19 +34,14 @@ def actionExit():
     sys.exit()
 
 
-class Second(QtWidgets.QMainWindow):
-    def __init__(self, parent=None):
-        super(Second, self).__init__(parent)
-
-
-class Ui_MainWindow(object):
+class Ui_MainWindow(QMainWindow):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         # MainWindow.resize(1097, 733)
-
         font = QtGui.QFont()
         font.setPointSize(12)
         MainWindow.setFont(font)
+
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -53,7 +50,7 @@ class Ui_MainWindow(object):
         self.menubar.setObjectName("menubar")
         self.menuBalanca = QtWidgets.QMenu(self.menubar)
         self.menuBalanca.setFont(font)
-        self.menuBalanca.setObjectName("menuBalanca")
+        self.menuBalanca.setObjectName("menuMonitoramento")
         self.menuSair = QtWidgets.QMenu(self.menubar)
         self.menuSair.setFont(font)
         self.menuSair.setObjectName("menuSair")
@@ -65,12 +62,13 @@ class Ui_MainWindow(object):
         self.actionIniciar_Camera.setFont(font)
         self.actionIniciar_Camera.setObjectName("actionIniciar_Camera")
         self.actionIniciar_Camera.triggered.connect(actionStartCamera)
+
         self.actionVeiculos_Registrados = QtGui.QAction(MainWindow)
         self.actionVeiculos_Registrados.setFont(font)
         self.actionVeiculos_Registrados.setObjectName(
             "actionVeiculos_Registrados")
         self.actionVeiculos_Registrados.triggered.connect(
-            actionVehicleRegistrations)
+            actionVehicleRegistration)
         self.actionSair = QtGui.QAction(MainWindow)
         self.actionSair.setFont(font)
         self.actionSair.setObjectName("actionSair")
@@ -87,11 +85,12 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
+        MainWindow.setWindowFlag(Qt.WindowType.WindowCloseButtonHint, False)
         MainWindow.setWindowTitle(_translate("MainWindow", "Principal"))
         self.menuBalanca.setTitle(_translate("MainWindow", "Monitoramento"))
         self.menuSair.setTitle(_translate("MainWindow", "Sair"))
         self.actionIniciar_Camera.setText(
-            _translate("MainWindow", "Iniciar Camera"))
+            _translate("MainWindow", "Iniciar Monitoramento"))
         self.actionIniciar_Camera.setShortcut(
             _translate("MainWindow", "Ctrl+C"))
         self.actionVeiculos_Registrados.setText(
@@ -102,17 +101,21 @@ class Ui_MainWindow(object):
         self.actionSair.setShortcut(_translate("MainWindow", "Ctrl+Q"))
 
 
-if __name__ == "__main__":
-    import sys
-
+def main():
+    global Window2
     app = QtWidgets.QApplication(sys.argv)
-    # segunda_tela = uic.loadUi("frame_relat.ui")
     MainWindow = QtWidgets.QMainWindow()
+    Window2 = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    ui2 = Ui_MainWindow()
-    ui2.setupUi(MainWindow)
-    MainWindow.setGeometry(50, 60, 300, 100)
+    ui2 = Ui_frameRelat()
+    ui2.setupUi(Window2)
+    MainWindow.setGeometry(0, 0, 300, 100)
     MainWindow.show()
-    startCamera()
+    actionStartCamera()
     sys.exit(app.exec())
+
+
+if __name__ == "__main__":
+    main()
+    

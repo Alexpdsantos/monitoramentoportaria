@@ -8,6 +8,7 @@ import pyperclip
 import os
 import ImageCreatedHandler as ich
 from manipularhtml import *
+from manipularhtml import tratarHtmlResponse
 
 
 def show_popup(title, message):
@@ -63,37 +64,39 @@ def getP():
                     resultado['Veiculo {}'.format(x + 1)] = info_geral
                     info_geral = {}
                     print("Placa Obtida: "+placa)
-
-                    tratarHtmlResponse(placa)
-
-                    # Verifica se a placa do veiculo já existe no banco
-                    conexao.connect()
-                    cursor = conexao.cursor()
-                    sql = f'SELECT * FROM veiculos WHERE veiculos.placa = "{placa}"'
-                    cursor.execute(sql)
-                    result = cursor.fetchone()
-
-                    if result != None:
-                        print(result)
-                        print("Já existe a Placa " + placa +
-                              " no banco de dados!")
+                    if len(placa) != 7:
+                        print('Não é uma placa válida!')
                     else:
-                        print(resultado)
-                        print("Registrando a placa " +
-                              placa+" no banco de dados!")
-                        create = f'INSERT INTO veiculos (data, placa, cor, fabricante, tipo, ano, modelo) VALUES ("{data}","{placa}","{cor2}","{fabricante2}","{tipo2}","{ano2}","{modelo2}")'
-                        cursor.execute(create)
-                        conexao.commit()
-                    cursor.close()
-                    conexao.close()
+                        tratarHtmlResponse(placa)
 
-                    # print(resultado)
-                    # print(resultado['Veiculo 1'])
-                    open('dicionario.json', 'w').write(
-                        json.dumps(resultado))
-                    show_popup("Monitoramento Portaria",
-                               "Placa Obtida: "+placa)
-                    pyperclip.copy(placa)
+                        # Verifica se a placa do veiculo já existe no banco
+                        conexao.connect()
+                        cursor = conexao.cursor()
+                        sql = f'SELECT * FROM veiculos WHERE veiculos.placa = "{placa}"'
+                        cursor.execute(sql)
+                        result = cursor.fetchone()
+
+                        if result != None:
+                            print(result)
+                            print("Já existe a Placa " + placa +
+                                  " no banco de dados!")
+                        else:
+                            print(resultado)
+                            print("Registrando a placa " +
+                                  placa+" no banco de dados!")
+                            create = f'INSERT INTO veiculos (data, placa, cor, fabricante, tipo, ano, modelo) VALUES ("{data}","{placa}","{cor2}","{fabricante2}","{tipo2}","{ano2}","{modelo2}")'
+                            cursor.execute(create)
+                            conexao.commit()
+                        cursor.close()
+                        conexao.close()
+
+                        # print(resultado)
+                        # print(resultado['Veiculo 1'])
+                        open('dicionario.json', 'w').write(
+                            json.dumps(resultado))
+                        show_popup("Monitoramento Portaria",
+                                   "Placa Obtida: "+placa)
+                        pyperclip.copy(placa)
 
         except TypeError as error:
             quantidade_placas = 0

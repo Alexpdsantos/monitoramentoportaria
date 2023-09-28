@@ -1,12 +1,18 @@
 {
-  "Marca": "RENAULT",
-  "Modelo": "KWID INTENS 2",
+  "Marca": "FIAT",
+  "Modelo": "UNO MILLE ECONOMY",
   "Importado": "Não",
-  "Ano": "2022",
-  "Ano Modelo": "2023",
-  "Cor": "Prata",
+  "Ano": "2010",
+  "Ano Modelo": "2011",
+  "Cor": "Branca",
+  "Cilindrada": "1000 cc",
+  "Potencia": "66 cv",
   "Combustível": "Gasolina",
-  "Chassi": "*******56713",
-  "UF": "MG",
-  "Município": "Poços de Caldas"
+  "Chassi": "*****6488120",
+  "Motor": "*****9624802",
+  "Passageiros": "5",
+  "UF": "PR",
+  "Município": "CURITIBA",
+  "Segmento": "Auto",
+  "Especie Veiculo": "Passageiro"
 }

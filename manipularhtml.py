@@ -33,10 +33,11 @@ def tratarHtmlResponse(placa):
             # Ler o arquivo datahtml.json e pegar o valor da chave Segmento
             with open('datahtml.json', 'r', encoding='utf8') as fs:
                 dados = json.load(fs)
+                print(f'KePlaca.com: {dados}')
                 segmento = dados.get("Segmento")
         else:
-            print('Falha ao obter o modelo do veículo...', response.status_code)
+            print('KePlaca.com: Falha ao obter o modelo do veículo...', response.status_code)
     except requests.Timeout:
-        print('Tempo de resposta excedido...')
+        print('KePlaca.com: Tempo de resposta excedido...')
     except requests.RequestException as e:
-        print('Erro na requisição:', str(e))
+        print('KePlaca.com: Erro na requisição:', str(e))

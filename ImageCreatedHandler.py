@@ -65,7 +65,7 @@ def getVehicle():
         print(f'Arquivo não encontrado!{ex}')
         return
     except Exception as exception:
-        print(f"Exceção não tratada!{exception}")
+        print(f"Exceção não tratada!?!{exception}")
 
 
 # IMAGE_PATH = imagem

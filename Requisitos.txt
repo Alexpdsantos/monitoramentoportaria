@@ -8,10 +8,10 @@ conexao = mysql.connector.connect(
     database=''
 )
 ______________________________________________________________________________________
-conexão rstp para acesso a câmeras IP
-source = 'rtsp://usuario:password@endereço_ip:554/cam/realmonitor?channel=1&subtype=0'
+conexão rtsp para acesso a câmeras IP
+source = 'rtsp://usuario:password@endereço_ip:porta/cam/realmonitor?channel=1&subtype=0'
 ______________________________________________________________________________________
-SECRET_KEY = 'sk_DEMODEMODEMODEMODEMODEMO'
+SECRET_KEY = '' ## Registrar conta no site da OpenALPR
 ______________________________________________________________________________________
 #Configurações para utilização no Windows
 python --version
@@ -27,7 +27,7 @@ pip install requests
 pip install mysql.connector
 pip install opencv-contrib-python
 ______________________________________________________________________________________
-#Configurações para utilização na placa raspberry pi
+#Configurações para utilização com raspberry pi
 sudo systemctl enable ssh.service 
 sudo apt-get update
 sudo apt-get upgrade
